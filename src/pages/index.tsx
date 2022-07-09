@@ -4,7 +4,11 @@ import { Card } from "../components/Card"
 import { useProductContext } from "../hooks/context/useProductContext"
 
 export const HomePage = () => {
-    const products = useProductContext()
+    const { products, error } = useProductContext()
+    if (error) {
+        console.log("An Error Occurred: ", error)
+        alert("Error fetching products from server, check your internet connection.")
+    }
     return (
         <>
             <Header />

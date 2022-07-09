@@ -1,3 +1,5 @@
+import { useCartContext } from "../hooks/context/useCartContext"
+
 type CardProps = {
     id: number;
     title: string;
@@ -9,6 +11,11 @@ type CardProps = {
 }
 
 export const Card: React.FC<CardProps> = ({ id, title, price, description, category, image, quantity }) => {
+    const {
+        getItemQuantity,
+        increaseItemQuantity,
+        decreaseItemQuantity,
+        removeFromCart } = useCartContext()
     return (
         <div className="card" key={id}>
             <div className="card-img">

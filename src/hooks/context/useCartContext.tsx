@@ -5,13 +5,13 @@ type CartContextProviderProps = {
 }
 
 type CartItemProps = {
-    id: number
+    id?: number
     title?: string
     price?: number
     description?: string
     category?: string
     image?: string
-    quantity: number
+    quantity?: number
 }
 
 type CartContextFuncProps = {
@@ -21,7 +21,7 @@ type CartContextFuncProps = {
     removeFromCart: (id: number) => void;
 }
 
-type CartContextItemProps = CartItemProps | CartContextFuncProps
+type CartContextItemProps = { cartItems: CartItemProps } &  CartContextFuncProps
 
 const CartContext = createContext({} as CartContextItemProps)
 
@@ -78,7 +78,8 @@ export const CartContextProvider = ({ children }: CartContextProviderProps) => {
         getItemQuantity,
         increaseItemQuantity,
         decreaseItemQuantity,
-        removeFromCart
+        removeFromCart,
+        cartItems
     }
 
     return (

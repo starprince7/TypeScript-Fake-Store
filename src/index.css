@@ -21,4 +21,10 @@
     .title {
         @apply font-medium
     }
+    .link {
+        @apply hover:text-gray-600 inline-block
+    }
+    .badge {
+        @apply rounded-full bg-red-600 text-white font-semibold px-1 text-xs
+    }
 }
