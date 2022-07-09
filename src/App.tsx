@@ -1,18 +1,23 @@
 import { HomePage } from "./pages"
+import { Cart } from "./pages/cart"
 import { Route, Routes, BrowserRouter } from "react-router-dom"
 import { ProductContextProvider } from "./hooks/context/useProductContext"
+import { CartContextProvider } from "./hooks/context/useCartContext"
 
 function App() {
   return (
     <div className="App">
-      <ProductContextProvider>
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/about" />
-          </Routes>
-        </BrowserRouter>
-      </ProductContextProvider>
+      <CartContextProvider>
+        <ProductContextProvider>
+          <BrowserRouter>
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/about" />
+              <Route path="/cart" element={<Cart />} />
+            </Routes>
+          </BrowserRouter>
+        </ProductContextProvider>
+      </CartContextProvider>
     </div>
   )
 }

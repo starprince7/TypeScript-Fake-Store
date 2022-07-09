@@ -1,3 +1,4 @@
+import { PlusIcon, MinusIcon } from "@heroicons/react/outline"
 import { useCartContext } from "../hooks/context/useCartContext"
 
 type CardProps = {
@@ -7,15 +8,17 @@ type CardProps = {
     description: string;
     category: string;
     image: string;
-    quantity: number;
 }
 
-export const Card: React.FC<CardProps> = ({ id, title, price, description, category, image, quantity }) => {
+export const Card: React.FC<CardProps> = ({ id, title, price, description, category, image }) => {
     const {
         getItemQuantity,
         increaseItemQuantity,
         decreaseItemQuantity,
         removeFromCart } = useCartContext()
+    
+    // Cart Item Quantities
+    const quantity = getItemQuantity(id)
     return (
         <div className="card" key={id}>
             <div className="card-img">
@@ -27,7 +30,17 @@ export const Card: React.FC<CardProps> = ({ id, title, price, description, categ
                 </div>
                 <p className="price-details my-2">${ price }</p>
                 <p className="price-details mb-2 line-clamp-2 text-sm">${ description }</p>
-                <button className="btn">+ Add To Cart</button>
+                <button className="btn" onClick={() => increaseItemQuantity(id)}>+ Add To Cart</button>
+                {
+                    quantity > 0 &&
+                    (
+                        <div className="flex justify-between items-center space-x-2">
+                            <button onClick={() => decreaseItemQuantity(id)} className="btn-sm"><MinusIcon className="h-5" /></button>
+                            <span className="inline-block">{ quantity }</span>
+                            <button onClick={() => increaseItemQuantity(id)}  className="btn-sm"><PlusIcon className="h-5" /></button>
+                        </div>
+                    )
+                }
             </div>
         </div>
     )

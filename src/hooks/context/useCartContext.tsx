@@ -5,23 +5,22 @@ type CartContextProviderProps = {
 }
 
 type CartItemProps = {
-    id?: number
+    id: number
     title?: string
     price?: number
     description?: string
     category?: string
     image?: string
-    quantity?: number
+    quantity: number
 }
 
-type CartContextFuncProps = {
+type CartContextItemProps = {
     getItemQuantity: (id: number) => number;
     increaseItemQuantity: (id: number) => void;
     decreaseItemQuantity: (id: number) => void;
     removeFromCart: (id: number) => void;
+    cartItems: CartItemProps[];
 }
-
-type CartContextItemProps = { cartItems: CartItemProps } &  CartContextFuncProps
 
 const CartContext = createContext({} as CartContextItemProps)
 
@@ -30,7 +29,7 @@ export const useCartContext = () => {
 }
 
 export const CartContextProvider = ({ children }: CartContextProviderProps) => {
-    const [cartItems, setCartItems] = useState<CartContextItemProps[]>([])
+    const [cartItems, setCartItems] = useState<CartItemProps[]>([])
 
     // Functions to provide to Provider value prop
 
@@ -42,7 +41,7 @@ export const CartContextProvider = ({ children }: CartContextProviderProps) => {
     // Add to cart or Increase Item quantity
     const increaseItemQuantity = (id: number) => {
         setCartItems(currItems => {
-            if (currItems.find(item => item.id === id) === null) {
+            if (currItems.find(item => item.id === id) == null) {
                 return [...currItems, { id, quantity: 1 }]
             } else {
                 return currItems.map(item => {

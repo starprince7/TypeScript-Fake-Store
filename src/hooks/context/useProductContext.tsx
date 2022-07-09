@@ -7,13 +7,12 @@ type ProductsProps = {
     description: string
     category: string
     image: string
-    quantity: number
 }[]
 
 type ErrorProps = {} | null
 
 type ProductsContextProps = {
-    products: ProductsProps
+    products: ProductsProps[]
     error: ErrorProps
 }
 
@@ -28,7 +27,7 @@ export const useProductContext = () => {
 }
 
 export const ProductContextProvider = ({ children }: ProductContextProviderProps) => {
-    const [products, setProducts] = useState<ProductsProps>([])
+    const [products, setProducts] = useState<ProductsProps[]>([])
     const [error, setError] = useState(null)
 
         useEffect(() => {

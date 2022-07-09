@@ -1,6 +1,10 @@
 import { Link } from "react-router-dom"
 import { ShoppingBagIcon } from "@heroicons/react/outline"
+import { useCartContext } from "../hooks/context/useCartContext"
+
 export const Header = () => {
+    const { cartItems } = useCartContext()
+    console.log("The cart number: ", cartItems)
     return (
         <header className="fixed w-full">
             <nav className="nav w-full py-6 shadow-md bg-white">
@@ -15,7 +19,10 @@ export const Header = () => {
                         <Link to="/cart">
                             <div className="cart-icon inline-block relative link translate-y-2">
                                 <ShoppingBagIcon className="h-7" />
-                                <span className="badge absolute bottom-0 right-0">0</span>
+                                {
+                                    cartItems.length > 0 &&
+                                    <span className="badge absolute bottom-0 right-0">{ cartItems.length }</span>
+                                }
                             </div>
                         </Link>
                     </div>
