@@ -21,7 +21,7 @@ export const Card: React.FC<CardProps> = ({ id, title, price, description, categ
     const quantity = getItemQuantity(id)
     return (
         <div className="card" key={id}>
-            <div className="card-img">
+            <div className="card-img h-44">
                 <img className="object-cover mx-auto" src={image} alt="product" width={200} />
             </div>
             <div className="card-body">

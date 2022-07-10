@@ -7,7 +7,7 @@ type ProductsProps = {
     description: string
     category: string
     image: string
-}[]
+}
 
 type ErrorProps = {} | null
 

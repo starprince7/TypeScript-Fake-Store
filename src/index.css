@@ -10,25 +10,25 @@
         @apply shadow-md bg-white rounded-lg overflow-hidden sm:max-w-xs md:max-w-sm max-h-96
     }
     .card-stack {
-        @apply shadow-sm bg-white rounded-lg overflow-hidden w-full h-40 text-sm px-2
+        @apply shadow-sm bg-white rounded-lg overflow-hidden w-full h-40 sm:h-52 text-sm px-2
     }
     .card-img {
-        @apply overflow-hidden h-44
+        @apply overflow-hidden h-auto object-contain
     }
     .card-body {
         @apply p-5 text-gray-600
     }
     .btn {
-        @apply bg-blue-600 outline-none text-white font-semibold rounded-md w-full py-3 px-10 my-1
+        @apply bg-blue-600 outline-none text-white font-semibold rounded-md w-full py-3 px-10 my-1 active:bg-blue-700
     }
     .btn-sm {
-        @apply bg-blue-600 outline-none text-white font-semibold rounded-md py-3 px-5 my-1
+        @apply bg-blue-600 outline-none text-white font-semibold rounded-md py-3 px-5 my-1 active:bg-blue-700
     }
     .btn-outline {
-        @apply border py-2 px-3
+        @apply border py-2 px-3 rounded-xl active:bg-gray-100
     }
     .title {
-        @apply font-medium
+        @apply font-medium text-gray-600 capitalize
     }
     .link {
         @apply hidden hover:text-gray-600 sm:inline-block

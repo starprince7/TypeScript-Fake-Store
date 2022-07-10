@@ -8,6 +8,7 @@ export const HomePage = () => {
     if (error) {
         console.log("An Error Occurred: ", error)
         alert("Error fetching products from server, check your internet connection.")
+        return
     }
     return (
         <>

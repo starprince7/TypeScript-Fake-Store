@@ -13,9 +13,9 @@ export const Header = () => {
                         <Link to="/"><h1 className="font-bold outline-none text-gray-600 md:text-2xl">Shopping Cart</h1></Link>
                     </div>
                     <div className="sm:space-x-3 md:space-x-5 text-gray-400">
-                        <div className="link"><Link to="/about">About</Link></div>
+                        <div className="link"><Link to="#">About</Link></div>
                         <div className="link"><Link to="/cart">Cart</Link></div>
-                        <div className="link"><Link to="/checkout">Checkout</Link></div>
+                        <div className="link"><Link to="#">Checkout</Link></div>
                         <Link to="/cart">
                             <div className="cart-icon rounded-full shadow-md p-2 inline-block relative link translate-y-2">
                                 <ShoppingBagIcon className="h-7" />

@@ -1,4 +1,5 @@
 import { createContext, useContext, useState } from "react"
+import { useLocalStorage } from "../localstorage/useLocalStorage"
 
 type CartContextProviderProps = {
     children: React.ReactNode
@@ -29,9 +30,10 @@ export const useCartContext = () => {
 }
 
 export const CartContextProvider = ({ children }: CartContextProviderProps) => {
-    const [cart, setCartItems] = useState<CartItemProps[]>([])
+    const [cart, setCartItems] = useLocalStorage<CartItemProps[]>("typeScript-shopping-cart", [])
 
-    // Functions to provide to Provider value prop
+
+    /* >>>>>>>>>>>> Functions to provide to a Context-Provider value prop <<<<<<<<<<<<<< */
 
     // Get Item quantity
     const getItemQuantity = (id: number) => {
