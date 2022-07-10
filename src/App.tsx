@@ -12,7 +12,6 @@ function App() {
           <BrowserRouter>
             <Routes>
               <Route path="/" element={<HomePage />} />
-              <Route path="/about" />
               <Route path="/cart" element={<Cart />} />
             </Routes>
           </BrowserRouter>
