@@ -30,16 +30,17 @@ export const Card: React.FC<CardProps> = ({ id, title, price, description, categ
                 </div>
                 <p className="price-details my-2">${ price }</p>
                 <p className="price-details mb-2 line-clamp-2 text-sm">${ description }</p>
-                <button className="btn" onClick={() => increaseItemQuantity(id)}>+ Add To Cart</button>
                 {
-                    quantity > 0 &&
+                    quantity > 0 ?
                     (
                         <div className="flex justify-between items-center space-x-2">
                             <button onClick={() => decreaseItemQuantity(id)} className="btn-sm"><MinusIcon className="h-5" /></button>
                             <span className="inline-block">{ quantity }</span>
-                            <button onClick={() => increaseItemQuantity(id)}  className="btn-sm"><PlusIcon className="h-5" /></button>
+                            <button onClick={() => increaseItemQuantity(id, price)}  className="btn-sm"><PlusIcon className="h-5" /></button>
                         </div>
                     )
+                    :
+                    <button className="btn" onClick={() => increaseItemQuantity(id, price)}>+ Add To Cart</button>
                 }
             </div>
         </div>

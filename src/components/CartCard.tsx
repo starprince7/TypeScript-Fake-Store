@@ -1,17 +1,26 @@
 import { useEffect, useState } from "react"
+import { PlusIcon, MinusIcon } from "@heroicons/react/outline"
+import { useCartContext } from "../hooks/context/useCartContext"
 
 type CartCardProps = {
     id: number
-    title?: string
     price?: number
-    description?: string
-    category?: string
-    image?: string
     quantity: number
 }
-export const CartCard = ({ id }: CartCardProps) => {
-    const [item, setItem] = useState({} as CartCardProps)
+
+type Items = {
+    id: number
+    title: string
+    price: number
+    description: string
+    category: string
+    image: string
+}
+
+export const CartCard = ({ id, quantity }: CartCardProps) => {
+    const [item, setItem] = useState({} as Items)
     const [error, setError] = useState(null)
+    const { decreaseItemQuantity, increaseItemQuantity } = useCartContext()
 
     useEffect(() => {
         fetch(`https://fakestoreapi.com/products/${id}`)
@@ -23,13 +32,17 @@ export const CartCard = ({ id }: CartCardProps) => {
     return (
         <div key={item.id} className="container">
             <div className="card-stack text-black bg-white">
-                <div className="sm:flex justify-between items-center">
-                    <div className="card-img">
-                        <img src={item.image} width={200} alt="Product image" />
+                <div className="flex justify-between items-start">
+                    <div className="card-img py-2">
+                        <img className="w-24 sm:w-44 object-contain" src={item.image} alt="Product image" />
                     </div>
-                    <div className="sm:max-w-sm">
-                        <div className="card-body title">{ item.title }</div>
-                        <div className="card-body line-clamp-2">{ item.description }</div>
+                    <div className="w-56 sm:max-w-sm md:max-w-3xl">
+                        <div className="card-body title line-clamp-3">{item.title}</div>
+                        <div className="grid grid-flow-col grid-cols-2 gap-1">
+                            <button onClick={() => decreaseItemQuantity(id)} className="btn-outline ml-auto"><MinusIcon className="h-5" /></button>
+                            <span className="inline-block text-center text-lg font-semibold text-gray-500"><i className="text-xs">Quantity</i><br />{ quantity }</span>
+                            <button onClick={() => increaseItemQuantity(id, item.price)} className="btn-outline ml-auto"><PlusIcon className="h-5" /></button>
+                        </div>
                     </div>
                 </div>
             </div>

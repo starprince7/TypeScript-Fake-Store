@@ -7,7 +7,7 @@ type CartContextProviderProps = {
 type CartItemProps = {
     id: number
     title?: string
-    price?: number
+    price: number
     description?: string
     category?: string
     image?: string
@@ -16,10 +16,10 @@ type CartItemProps = {
 
 type CartContextItemProps = {
     getItemQuantity: (id: number) => number;
-    increaseItemQuantity: (id: number) => void;
+    increaseItemQuantity: (id: number, price: number) => void;
     decreaseItemQuantity: (id: number) => void;
     removeFromCart: (id: number) => void;
-    cartItems: CartItemProps[];
+    cart: CartItemProps[];
 }
 
 const CartContext = createContext({} as CartContextItemProps)
@@ -29,23 +29,23 @@ export const useCartContext = () => {
 }
 
 export const CartContextProvider = ({ children }: CartContextProviderProps) => {
-    const [cartItems, setCartItems] = useState<CartItemProps[]>([])
+    const [cart, setCartItems] = useState<CartItemProps[]>([])
 
     // Functions to provide to Provider value prop
 
     // Get Item quantity
     const getItemQuantity = (id: number) => {
-        return cartItems.find(item => item.id === id)?.quantity || 0
+        return cart.find(item => item.id === id)?.quantity || 0
     }
 
     // Add to cart or Increase Item quantity
-    const increaseItemQuantity = (id: number) => {
+    const increaseItemQuantity = (id: number, price: number) => {
         setCartItems(currItems => {
             if (currItems.find(item => item.id === id) == null) {
-                return [...currItems, { id, quantity: 1 }]
+                return [...currItems, { id, quantity: 1, price: price }]
             } else {
                 return currItems.map(item => {
-                    if (item.id === id) return { ...item, quantity: item.quantity + 1 }
+                    if (item.id === id) return { ...item, quantity: item.quantity + 1}
                     else return item
                 })
             }
@@ -56,7 +56,7 @@ export const CartContextProvider = ({ children }: CartContextProviderProps) => {
     const decreaseItemQuantity = (id: number) => {
         setCartItems(currItems => {
             if (currItems.find(item => item.id === id)?.quantity === 1) {
-                return currItems.filter(item => item.id === id)
+                return currItems.filter(item => item.id !== id)
             } else {
                 return currItems.map(item => {
                     if (item.id === id) return { ...item, quantity: item.quantity - 1 }
@@ -78,7 +78,7 @@ export const CartContextProvider = ({ children }: CartContextProviderProps) => {
         increaseItemQuantity,
         decreaseItemQuantity,
         removeFromCart,
-        cartItems
+        cart
     }
 
     return (
